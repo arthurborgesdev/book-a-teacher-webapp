@@ -1,10 +1,8 @@
 import * as React from 'react';
-// import { useSelector } from 'react-redux';
 import { useGetTeachersQuery } from '../services/teacher';
 
 const Main = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
-  // const teachers = useSelector((state) => state.teacher);
   if (isLoading) {
     return <div>Loading...</div>;
   }
