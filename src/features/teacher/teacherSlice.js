@@ -7,7 +7,7 @@ export const teacherSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
-      state.push(action.payload)
+      state.push(action.payload);
     },
     remove: (state, action) => {
       state.filter((teacher) => teacher !== action.payload);
