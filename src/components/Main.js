@@ -1,8 +1,15 @@
 import * as React from 'react';
+import {
+  Link,
+  useRouteMatch,
+} from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
 
 const Main = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
+
+  const { url } = useRouteMatch();
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -28,6 +35,13 @@ const Main = () => {
                 Teacher Subject:
                 {teacher.subject}
               </p>
+              <Link
+                key={teacher.id}
+                href="/#"
+                to={`${url}teachers/${teacher.id}`}
+              >
+                See details
+              </Link>
             </div>
           ))
         }

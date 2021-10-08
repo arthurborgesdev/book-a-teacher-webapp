@@ -8,7 +8,13 @@ import {
 import Login from './components/Login';
 import Main from './components/Main';
 
-function App() {
+const teacherRoutes = teachers.map((teacher) => (
+  <Route key={teacher.id} path={`/teachers/${teacher.id}`}>
+    <TeacherDetails name={teacher.name} />
+  </Route>
+));
+
+const App = () => {
   return (
     <Router>
       <Switch>
@@ -18,6 +24,7 @@ function App() {
         <Route path="/">
           <Main />
         </Route>
+        { teacherRoutes }
       </Switch>
     </Router>
   );
