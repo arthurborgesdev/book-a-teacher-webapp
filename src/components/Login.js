@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import {
+  useHistory,
+} from 'react-router-dom';
 
 import setToLocalStorage from '../scripts/storage';
 
 const Login = () => {
+  const history = useHistory();
+
   const [username, setUsername] = useState('');
 
   const usernameChange = (e) => {
@@ -13,6 +18,7 @@ const Login = () => {
     e.preventDefault();
     if (username.trim()) {
       setToLocalStorage(username);
+      history.push('/');
     }
   };
 
