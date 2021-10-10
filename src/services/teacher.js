@@ -7,7 +7,10 @@ export const teacherApi = createApi({
     getTeachers: builder.query({
       query: () => '/teachers',
     }),
+    getTeacherDetails: builder.query({
+      query: (id) => `/teachers/${id}`,
+    }),
   }),
 });
 
-export const { useGetTeachersQuery } = teacherApi;
+export const { useGetTeachersQuery, useGetTeacherDetailsQuery } = teacherApi;

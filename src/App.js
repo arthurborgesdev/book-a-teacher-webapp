@@ -22,19 +22,19 @@ const App = () => {
   }
 
   const teacherRoutes = data.map((teacher) => (
-    <Route key={teacher.id} path={`/teachers/${teacher.id}`}>
-      <TeacherDetails name={teacher.name} />
+    <Route key={teacher.id} exact path={`/teachers/${teacher.id}`}>
+      <TeacherDetails identifier={teacher.id} />
     </Route>
   ));
 
   return (
     <Router>
       <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
         <Route exact path="/">
           <Main />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
         { teacherRoutes }
       </Switch>

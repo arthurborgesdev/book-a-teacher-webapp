@@ -4,7 +4,6 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
-// import TeacherDetails from './TeacherDetails';
 
 const Main = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
