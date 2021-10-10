@@ -18,7 +18,12 @@ const App = () => {
     return <div>Loading...</div>;
   }
   if (error) {
-    return <div>Oops, an error occured</div>;
+    return (
+      <div>
+        Oops, this error occured:
+        {error}
+      </div>
+    );
   }
 
   const teacherRoutes = data.map((teacher) => (
