@@ -4,6 +4,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
+// import TeacherDetails from './TeacherDetails';
 
 const Main = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
@@ -16,6 +17,7 @@ const Main = () => {
   if (error) {
     return <div>Oops, an error occured</div>;
   }
+
   return (
     <>
       <h1>This is main page!</h1>
