@@ -35,7 +35,7 @@ const TeacherDetails = ({ identifier }) => {
       </p>
       <p>
         Subject id:
-        {data.subject_name}
+        {data.subject}
       </p>
     </>
   );

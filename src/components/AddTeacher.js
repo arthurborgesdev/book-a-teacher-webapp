@@ -45,7 +45,7 @@ const AddTeacher = () => {
         setSavedStatus(['saved']);
         e.target.reset();
       } catch (err) {
-        const errors = err.data.data;
+        const errors = err.data.error;
         saveErrorMessages(errors);
         setSavedStatus(['error']);
       }
