@@ -8,6 +8,7 @@ import {
 import Login from './components/Login';
 import Main from './components/Main';
 import TeacherDetails from './components/TeacherDetails';
+import AddTeacher from './components/AddTeacher';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -42,6 +43,9 @@ const App = () => {
           <Login />
         </Route>
         { teacherRoutes }
+        <Route path="/teachers/new">
+          <AddTeacher />
+        </Route>
       </Switch>
     </Router>
   );
