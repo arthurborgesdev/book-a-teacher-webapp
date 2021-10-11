@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useAddNewTeacherMutation } from '../services/teacher';
+
+import SubmitFallback from './SubmitFallback';
 
 const AddTeacher = () => {
   const [name, setName] = useState('');
@@ -34,8 +37,9 @@ const AddTeacher = () => {
         setName('');
         setSubjectId('');
         setDetails('');
-        setProfessionalPhoto('');
+        setProfessionalPhoto(null);
         setSavedStatus(['saved']);
+        e.target.reset();
       } catch (err) {
         setSavedStatus(['error', err]);
       }
@@ -49,8 +53,7 @@ const AddTeacher = () => {
       case 'error':
         return (
           <p>
-            This error occurred:
-            {savedStatus[1]}
+            This error occurred
           </p>
         );
       default:
@@ -59,25 +62,27 @@ const AddTeacher = () => {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      Teacher name:
-      <input type="text" value={name} onChange={onNameChange} />
-      <br />
-      <br />
-      Subject ID:
-      <input type="text" value={subjectId} onChange={onSubjectIdChange} />
-      <br />
-      <br />
-      Teacher Details:
-      <input type="text" value={details} onChange={onDetailsChange} />
-      <br />
-      <br />
-      <input type="file" accept="image/*" multiple={false} onChange={onImageChange} />
-      <br />
-      <br />
-      <input type="submit" value="Send" />
-      <Message />
-    </form>
+    <ErrorBoundary FallbackComponent={SubmitFallback}>
+      <form onSubmit={onFormSubmit}>
+        Teacher name:
+        <input type="text" value={name} onChange={onNameChange} required />
+        <br />
+        <br />
+        Subject ID:
+        <input type="text" value={subjectId} onChange={onSubjectIdChange} required />
+        <br />
+        <br />
+        Teacher Details:
+        <input type="text" value={details} onChange={onDetailsChange} required />
+        <br />
+        <br />
+        <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
+        <br />
+        <br />
+        <input type="submit" value="Send" />
+        <Message />
+      </form>
+    </ErrorBoundary>
   );
 };
 
