@@ -24,6 +24,7 @@ const TeacherDetails = ({ identifier }) => {
         Name:
         {data.name}
       </h2>
+      <img src={data.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
       <p>
         ID:
         {data.id}
@@ -34,15 +35,7 @@ const TeacherDetails = ({ identifier }) => {
       </p>
       <p>
         Subject id:
-        {data.subject_id}
-      </p>
-      <p>
-        created_at:
-        {data.created_at}
-      </p>
-      <p>
-        updated_at:
-        {data.updated_at}
+        {data.subject_name}
       </p>
     </>
   );

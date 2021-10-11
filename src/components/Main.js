@@ -43,7 +43,7 @@ const Main = () => {
               </p>
               <p>
                 Teacher Subject:
-                {teacher.subject}
+                {teacher.subject_name}
               </p>
               <Link
                 key={teacher.id}

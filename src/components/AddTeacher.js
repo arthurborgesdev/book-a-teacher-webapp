@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import { useAddNewTeacherMutation } from '../services/teacher';
-
-import SubmitFallback from './SubmitFallback';
 
 const AddTeacher = () => {
   const [name, setName] = useState('');
@@ -10,12 +7,19 @@ const AddTeacher = () => {
   const [details, setDetails] = useState('');
   const [professionalPhoto, setProfessionalPhoto] = useState('');
   const [savedStatus, setSavedStatus] = useState(['off']);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const onNameChange = (e) => setName(e.target.value);
   const onSubjectIdChange = (e) => setSubjectId(e.target.value);
   const onDetailsChange = (e) => setDetails(e.target.value);
   const onImageChange = (e) => setProfessionalPhoto(e.target.files[0]);
+
   const [addNewTeacher, { isLoading }] = useAddNewTeacherMutation();
+
+  const saveErrorMessages = (errors) => {
+    const errorsToSave = Object.entries(errors).map((err) => `${err[0]}: ${err[1]}`);
+    setErrorMessages(errorsToSave);
+  };
 
   const canSave = [
     name,
@@ -25,9 +29,9 @@ const AddTeacher = () => {
   ].every(Boolean) && !isLoading;
 
   const onFormSubmit = async (e) => {
+    e.preventDefault();
     if (canSave) {
       try {
-        e.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
         formData.append('subject_id', subjectId);
@@ -41,7 +45,9 @@ const AddTeacher = () => {
         setSavedStatus(['saved']);
         e.target.reset();
       } catch (err) {
-        setSavedStatus(['error', err]);
+        const errors = err.data.data;
+        saveErrorMessages(errors);
+        setSavedStatus(['error']);
       }
     }
   };
@@ -52,9 +58,12 @@ const AddTeacher = () => {
         return <p>Created sucessfully!</p>;
       case 'error':
         return (
-          <p>
-            This error occurred
-          </p>
+          <div>
+            This error occurred:
+            { errorMessages.map((error) => (
+              <p key={error}>{error}</p>
+            ))}
+          </div>
         );
       default:
         return <p />;
@@ -62,27 +71,25 @@ const AddTeacher = () => {
   };
 
   return (
-    <ErrorBoundary FallbackComponent={SubmitFallback}>
-      <form onSubmit={onFormSubmit}>
-        Teacher name:
-        <input type="text" value={name} onChange={onNameChange} required />
-        <br />
-        <br />
-        Subject ID:
-        <input type="text" value={subjectId} onChange={onSubjectIdChange} required />
-        <br />
-        <br />
-        Teacher Details:
-        <input type="text" value={details} onChange={onDetailsChange} required />
-        <br />
-        <br />
-        <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
-        <br />
-        <br />
-        <input type="submit" value="Send" />
-        <Message />
-      </form>
-    </ErrorBoundary>
+    <form onSubmit={onFormSubmit}>
+      Teacher name:
+      <input type="text" value={name} onChange={onNameChange} required />
+      <br />
+      <br />
+      Subject ID:
+      <input type="text" value={subjectId} onChange={onSubjectIdChange} required />
+      <br />
+      <br />
+      Teacher Details:
+      <input type="text" value={details} onChange={onDetailsChange} required />
+      <br />
+      <br />
+      <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
+      <br />
+      <br />
+      <input type="submit" value="Send" />
+      <Message />
+    </form>
   );
 };
 
