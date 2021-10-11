@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Link,
+  NavLink,
   useRouteMatch,
 } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
@@ -25,6 +26,9 @@ const Main = () => {
   return (
     <>
       <h1>This is main page!</h1>
+      <nav>
+        <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+      </nav>
       <div>
         {
           data.map((teacher) => (
@@ -39,7 +43,7 @@ const Main = () => {
               </p>
               <p>
                 Teacher Subject:
-                {teacher.subject}
+                {teacher.subject_name}
               </p>
               <Link
                 key={teacher.id}

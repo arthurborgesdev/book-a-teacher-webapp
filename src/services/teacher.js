@@ -10,7 +10,18 @@ export const teacherApi = createApi({
     getTeacherDetails: builder.query({
       query: (id) => `/teachers/${id}`,
     }),
+    addNewTeacher: builder.mutation({
+      query: (initialTeacher) => ({
+        url: '/teachers',
+        method: 'POST',
+        body: initialTeacher,
+      }),
+    }),
   }),
 });
 
-export const { useGetTeachersQuery, useGetTeacherDetailsQuery } = teacherApi;
+export const {
+  useGetTeachersQuery,
+  useGetTeacherDetailsQuery,
+  useAddNewTeacherMutation,
+} = teacherApi;
