@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import {
   useHistory,
+  useLocation,
 } from 'react-router-dom';
-
-import setToLocalStorage from '../scripts/storage';
+import { useAuth } from './authentication/ProvideAuth';
 
 const Login = () => {
   const history = useHistory();
+  const location = useLocation();
+  const auth = useAuth();
+
+  const { from } = location.state || { from: { pathname: '/' } };
 
   const [username, setUsername] = useState('');
 
@@ -16,9 +20,11 @@ const Login = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      setToLocalStorage(username);
-      history.push('/');
+    const validatedUsername = username.trim();
+    if (validatedUsername) {
+      auth.signin(validatedUsername, () => {
+        history.replace(from);
+      });
     }
   };
 

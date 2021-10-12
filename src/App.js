@@ -4,6 +4,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import ProvideAuth from './components/authentication/ProvideAuth';
+import PrivateRoute from './components/authentication/PrivateRoute';
 
 import Login from './components/Login';
 import Main from './components/Main';
@@ -11,6 +13,7 @@ import TeacherDetails from './components/TeacherDetails';
 import AddTeacher from './components/AddTeacher';
 import AddBooking from './components/AddBooking';
 import Bookings from './components/Bookings';
+import DeleteTeacher from './components/DeleteTeacher';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -30,32 +33,37 @@ const App = () => {
   }
 
   const teacherRoutes = data.map((teacher) => (
-    <Route key={teacher.id} exact path={`/teachers/${teacher.id}`}>
+    <PrivateRoute key={teacher.id} exact path={`/teachers/${teacher.id}`}>
       <TeacherDetails identifier={teacher.id} />
-    </Route>
+    </PrivateRoute>
   ));
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        { teacherRoutes }
-        <Route exact path="/teachers/new">
-          <AddTeacher />
-        </Route>
-        <Route exact path="/bookings/new">
-          <AddBooking />
-        </Route>
-        <Route exact path="/bookings">
-          <Bookings />
-        </Route>
-        <Route path="/">
-          <Main />
-        </Route>
-      </Switch>
-    </Router>
+    <ProvideAuth>
+      <Router>
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          { teacherRoutes }
+          <PrivateRoute exact path="/teachers/new">
+            <AddTeacher />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bookings/new">
+            <AddBooking />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bookings">
+            <Bookings />
+          </PrivateRoute>
+          <PrivateRoute exact path="/teachers/delete">
+            <DeleteTeacher />
+          </PrivateRoute>
+          <PrivateRoute path="/">
+            <Main />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </ProvideAuth>
   );
 };
 

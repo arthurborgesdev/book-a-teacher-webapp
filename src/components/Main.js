@@ -37,6 +37,9 @@ const Main = () => {
           <li>
             <NavLink to={`${url}bookings`}>My bookings</NavLink>
           </li>
+          <li>
+            <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
+          </li>
         </ul>
       </nav>
       <div>
