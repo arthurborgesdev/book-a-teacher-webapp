@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   useHistory,
   useLocation,
+  Redirect,
 } from 'react-router-dom';
 import { useAuth } from './authentication/ProvideAuth';
 
@@ -9,6 +10,7 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
   const auth = useAuth();
+  console.log(location);
 
   const { from } = location.state || { from: { pathname: '/' } };
 
@@ -28,16 +30,24 @@ const Login = () => {
     }
   };
 
-  return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <h1>Login</h1>
-        Username:
-        <input type="text" value={username} onChange={usernameChange} />
-        <input type="submit" value="Enter" />
-      </form>
-    </div>
-  );
+  return auth.user ? (
+    <Redirect
+      to={{
+        pathname: '/',
+        state: { from: location },
+      }}
+    />
+  )
+    : (
+      <div>
+        <form onSubmit={handleFormSubmit}>
+          <h1>Login</h1>
+          Username:
+          <input type="text" value={username} onChange={usernameChange} />
+          <input type="submit" value="Enter" />
+        </form>
+      </div>
+    );
 };
 
 export default Login;
