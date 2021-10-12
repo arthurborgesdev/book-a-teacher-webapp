@@ -9,6 +9,8 @@ import Login from './components/Login';
 import Main from './components/Main';
 import TeacherDetails from './components/TeacherDetails';
 import AddTeacher from './components/AddTeacher';
+import AddBooking from './components/AddBooking';
+import Bookings from './components/Bookings';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -36,15 +38,21 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
         <Route exact path="/login">
           <Login />
         </Route>
         { teacherRoutes }
-        <Route path="/teachers/new">
+        <Route exact path="/teachers/new">
           <AddTeacher />
+        </Route>
+        <Route exact path="/bookings/new">
+          <AddBooking />
+        </Route>
+        <Route exact path="/bookings">
+          <Bookings />
+        </Route>
+        <Route path="/">
+          <Main />
         </Route>
       </Switch>
     </Router>

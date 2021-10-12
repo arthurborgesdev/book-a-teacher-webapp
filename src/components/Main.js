@@ -27,7 +27,17 @@ const Main = () => {
     <>
       <h1>This is main page!</h1>
       <nav>
-        <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+        <ul>
+          <li>
+            <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}bookings`}>My bookings</NavLink>
+          </li>
+        </ul>
       </nav>
       <div>
         {
