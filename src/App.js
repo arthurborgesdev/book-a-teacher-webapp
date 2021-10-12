@@ -14,6 +14,7 @@ import AddTeacher from './components/AddTeacher';
 import AddBooking from './components/AddBooking';
 import Bookings from './components/Bookings';
 import DeleteTeacher from './components/DeleteTeacher';
+import NoMatch from './components/authentication/NoMatch';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -58,9 +59,12 @@ const App = () => {
           <PrivateRoute exact path="/teachers/delete">
             <DeleteTeacher />
           </PrivateRoute>
-          <PrivateRoute path="/">
+          <PrivateRoute exact path="/">
             <Main />
           </PrivateRoute>
+          <Route path="*">
+            <NoMatch />
+          </Route>
         </Switch>
       </Router>
     </ProvideAuth>

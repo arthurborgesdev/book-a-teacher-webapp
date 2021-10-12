@@ -1,7 +1,8 @@
-const setToLocalStorage = (data) => {
+export const setToLocalStorage = (data) => {
   localStorage.setItem('username', JSON.stringify(data));
 };
 
-export {
-  setToLocalStorage as default,
+export const getFromLocalStorage = () => {
+  const username = localStorage.getItem('username');
+  return JSON.parse(username);
 };

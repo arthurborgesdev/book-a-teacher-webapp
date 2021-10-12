@@ -1,6 +1,10 @@
-import React, { useContext, createContext, useState } from 'react';
+import React, {
+  useContext,
+  createContext,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
-import setToLocalStorage from '../../scripts/storage';
+import { setToLocalStorage, getFromLocalStorage } from '../../scripts/storage';
 
 const fakeAuth = {
   isAuthenticated: false,
@@ -15,7 +19,7 @@ const fakeAuth = {
 };
 
 const useProvideAuth = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getFromLocalStorage());
 
   const signin = (username, cb) => fakeAuth.signin(() => {
     setUser(username);
