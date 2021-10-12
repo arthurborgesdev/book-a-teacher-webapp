@@ -5,7 +5,7 @@ import { useAuth } from './ProvideAuth';
 
 const PrivateRoute = ({ children, path }) => {
   const auth = useAuth();
-  console.log(auth);
+
   return (
     <Route
       path={path}

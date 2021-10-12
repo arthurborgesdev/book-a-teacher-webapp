@@ -10,7 +10,6 @@ const Login = () => {
   const history = useHistory();
   const location = useLocation();
   const auth = useAuth();
-  console.log(location);
 
   const { from } = location.state || { from: { pathname: '/' } };
 
