@@ -11,7 +11,7 @@ import { useGetTeachersQuery } from '../services/teacher';
 
 const Main = () => {
   const {
-    data,
+    data: teachers,
     error,
     isLoading,
     refetch,
@@ -56,7 +56,7 @@ const Main = () => {
       </nav>
       <div>
         {
-          data.map((teacher) => (
+          teachers.map((teacher) => (
             <div key={teacher.id}>
               <p>
                 Teacher ID:
