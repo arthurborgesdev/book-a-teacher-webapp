@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGetBookingsQuery } from '../services/booking';
 
 const Bookings = () => {
-  const { data, error, isLoading } = useGetBookingsQuery();
+  const {
+    data,
+    error,
+    isLoading,
+    refetch,
+  } = useGetBookingsQuery();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -18,23 +27,34 @@ const Bookings = () => {
 
   return (
     <>
-      <h2>
-        Name:
-        {data.teacher}
-      </h2>
-      <img src={data.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
-      <p>
-        ID:
-        {data.id}
-      </p>
-      <p>
-        City:
-        {data.city}
-      </p>
-      <p>
-        Subject id:
-        {data.subject}
-      </p>
+      <h1>My Teachers Bookings</h1>
+      {
+        data.map((booking) => (
+          <div key={booking.id}>
+            <h2>
+              Name:
+              {booking.teacher}
+            </h2>
+            <img src={booking.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
+            <p>
+              ID:
+              {booking.id}
+            </p>
+            <p>
+              City:
+              {booking.city}
+            </p>
+            <p>
+              Subject:
+              {booking.subject}
+            </p>
+            <p>
+              Booking date:
+              {booking.booked_for}
+            </p>
+          </div>
+        ))
+      }
     </>
   );
 };
