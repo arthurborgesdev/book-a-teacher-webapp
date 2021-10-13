@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import { useGetSubjectsQuery } from '../services/dropdown';
 import { useAddNewTeacherMutation } from '../services/teacher';
 
 const AddTeacher = () => {
   const [name, setName] = useState('');
-  const [subjectId, setSubjectId] = useState('');
+  const [subject, setSubject] = useState('');
   const [details, setDetails] = useState('');
   const [professionalPhoto, setProfessionalPhoto] = useState('');
   const [savedStatus, setSavedStatus] = useState(['off']);
   const [errorMessages, setErrorMessages] = useState([]);
 
   const onNameChange = (e) => setName(e.target.value);
-  const onSubjectIdChange = (e) => setSubjectId(e.target.value);
+  const onSubjectChange = (e) => setSubject(e.target.value);
   const onDetailsChange = (e) => setDetails(e.target.value);
   const onImageChange = (e) => setProfessionalPhoto(e.target.files[0]);
 
+  const { data: subjects, error, isLoading: subjectLoading } = useGetSubjectsQuery();
   const [addNewTeacher, { isLoading }] = useAddNewTeacherMutation();
 
   const saveErrorMessages = (errors) => {
@@ -23,7 +25,7 @@ const AddTeacher = () => {
 
   const canSave = [
     name,
-    subjectId,
+    subject,
     details,
     professionalPhoto,
   ].every(Boolean) && !isLoading;
@@ -34,12 +36,12 @@ const AddTeacher = () => {
       try {
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('subject_id', subjectId);
+        formData.append('subject_id', subject);
         formData.append('details', details);
         formData.append('professional_photo', professionalPhoto);
         await addNewTeacher(formData).unwrap();
         setName('');
-        setSubjectId('');
+        setSubject('');
         setDetails('');
         setProfessionalPhoto(null);
         setSavedStatus(['saved']);
@@ -70,14 +72,31 @@ const AddTeacher = () => {
     }
   };
 
+  if (subjectLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div>
+        Oops, this error occured:
+        {error}
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={onFormSubmit}>
       Teacher name:
       <input type="text" value={name} onChange={onNameChange} required />
       <br />
       <br />
-      Subject ID:
-      <input type="text" value={subjectId} onChange={onSubjectIdChange} required />
+      Subject:
+      <select value={subject} onChange={onSubjectChange} required>
+        <option value="">Select a Subject</option>
+        { subjects.map((subject) => (
+          <option key={subject.id} value={subject.id}>{subject.name}</option>
+        ))}
+      </select>
       <br />
       <br />
       Teacher Details:
