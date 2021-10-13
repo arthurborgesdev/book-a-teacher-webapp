@@ -13,7 +13,7 @@ const DeleteTeacher = () => {
     { isLoading: removeTeacherIsLoading },
   ] = useRemoveTeacherMutation();
 
-  if (getTeachersIsLoading && removeTeacherIsLoading) {
+  if (getTeachersIsLoading || removeTeacherIsLoading) {
     return <div>Loading...</div>;
   }
   if (error) {

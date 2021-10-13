@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useGetBookingsQuery } from '../services/booking';
+import { useGetBookingsQuery, useRemoveBookingMutation } from '../services/booking';
 
 const Bookings = () => {
   const {
@@ -9,11 +9,16 @@ const Bookings = () => {
     refetch,
   } = useGetBookingsQuery();
 
+  const [
+    removeBooking,
+    { isLoading: removeBookingIsLoading },
+  ] = useRemoveBookingMutation();
+
   useEffect(() => {
     refetch();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || removeBookingIsLoading) {
     return <div>Loading...</div>;
   }
   if (error) {
@@ -52,6 +57,7 @@ const Bookings = () => {
               Booking date:
               {booking.booked_for}
             </p>
+            <button type="button" onClick={() => removeBooking(booking.id)}>Remove</button>
           </div>
         ))
       }
