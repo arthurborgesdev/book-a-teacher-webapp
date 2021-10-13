@@ -1,35 +1,54 @@
 import React from 'react';
+import { useGetTeachersQuery, useRemoveTeacherMutation } from '../services/teacher';
 
 const DeleteTeacher = () => {
   const {
-    data: teachers,
+    data = [],
     error,
-    isLoading,
-    refetch,
+    isLoading: getTeachersIsLoading,
   } = useGetTeachersQuery();
+
+  const [
+    removeTeacher,
+    { isLoading: removeTeacherIsLoading },
+  ] = useRemoveTeacherMutation();
+
+  if (getTeachersIsLoading && removeTeacherIsLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return (
+      <div>
+        Oops, this error occured:
+        {error}
+      </div>
+    );
+  }
 
   return (
     <div>
       <h1>Delete Teacher Page</h1>
       <div>
-      {
-        teachers.map((teacher) => (
-        <div key={teacher.id}>
-          <p>
-            Teacher ID:
-            {teacher.id}
-          </p>
-          {' | '}
-          <p>
-            Teacher Name:
-            {teacher.name}
-          </p>
-          {' | '}
-          <button onClick={}></button>
-        ))
-      }
+        {
+          data.map((teacher) => (
+            <div key={teacher.id}>
+              <span>
+                Teacher ID:
+                {teacher.id}
+              </span>
+              {' | '}
+              <span>
+                Teacher Name:
+                {teacher.name}
+              </span>
+              {' | '}
+              <button type="button" onClick={() => removeTeacher(teacher.id)}>Remove</button>
+            </div>
+          ))
+        }
+      </div>
     </div>
-  </div>
+  );
 };
 
 export default DeleteTeacher;
