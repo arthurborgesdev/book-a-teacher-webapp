@@ -7,9 +7,17 @@ export const bookingApi = createApi({
     getBookings: builder.query({
       query: () => '/bookings',
     }),
+    addNewBooking: builder.mutation({
+      query: (initialBooking) => ({
+        url: '/bookings',
+        method: 'POST',
+        body: initialBooking,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetBookingsQuery,
+  useAddNewBookingMutation,
 } = bookingApi;

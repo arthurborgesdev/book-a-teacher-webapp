@@ -1,10 +1,13 @@
 import React from 'react';
+import {
+  NavLink,
+} from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { useGetTeacherDetailsQuery } from '../services/teacher';
 
 const TeacherDetails = ({ identifier }) => {
-  const { data, error, isLoading } = useGetTeacherDetailsQuery(identifier);
+  const { data: teacher, error, isLoading } = useGetTeacherDetailsQuery(identifier);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -22,21 +25,22 @@ const TeacherDetails = ({ identifier }) => {
     <>
       <h2>
         Name:
-        {data.name}
+        {teacher.name}
       </h2>
-      <img src={data.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
+      <img src={teacher.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
       <p>
         ID:
-        {data.id}
+        {teacher.id}
       </p>
       <p>
         Details:
-        {data.details}
+        {teacher.details}
       </p>
       <p>
-        Subject id:
-        {data.subject}
+        Subject:
+        {teacher.subject}
       </p>
+      <NavLink to={`/bookings/new/${teacher.id}`}>Book this Teacher</NavLink>
     </>
   );
 };
