@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {
+  useEffect,
+} from 'react';
+import {
   Link,
   NavLink,
   useRouteMatch,
@@ -7,7 +10,16 @@ import {
 import { useGetTeachersQuery } from '../services/teacher';
 
 const Main = () => {
-  const { data, error, isLoading } = useGetTeachersQuery();
+  const {
+    data,
+    error,
+    isLoading,
+    refetch,
+  } = useGetTeachersQuery();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const { url } = useRouteMatch();
 
