@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGetBookingsQuery } from '../services/booking';
 
 const Bookings = () => {
-  const { data, error, isLoading } = useGetBookingsQuery();
+  const {
+    data,
+    error,
+    isLoading,
+    refetch,
+  } = useGetBookingsQuery();
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
