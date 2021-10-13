@@ -40,7 +40,7 @@ const TeacherDetails = ({ identifier }) => {
         Subject:
         {teacher.subject}
       </p>
-      <NavLink to="/bookings/new" teacherFromDetails={teacher.id}>Book this Teacher</NavLink>
+      <NavLink to={`/bookings/new/${teacher.id}`}>Book this Teacher</NavLink>
     </>
   );
 };

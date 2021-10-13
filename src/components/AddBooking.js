@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
 import { useGetCitiesQuery } from '../services/dropdown';
 import { getFromLocalStorage } from '../scripts/storage';
 import { useAddNewBookingMutation } from '../services/booking';
 
-const AddBooking = ({ teacherFromDetails }) => {
+const AddBooking = () => {
   const [teacher, setTeacher] = useState('');
   const [city, setCity] = useState('');
   const [bookedDate, setBookedDate] = useState('');
   const [savedStatus, setSavedStatus] = useState(['off']);
   const [errorMessages, setErrorMessages] = useState([]);
 
-  useEffect(() => {
-    if (teacherFromDetails) {
-      setTeacher(teacherFromDetails);
-    } else {
-      setTeacher('');
-    }
-  }, []);
+  const { id: teacherId } = useParams();
 
   const onTeacherChange = (e) => setTeacher(e.target.value);
   const onCityChange = (e) => setCity(e.target.value);
@@ -32,6 +26,12 @@ const AddBooking = ({ teacherFromDetails }) => {
     const errorsToSave = Object.entries(errors).map((err) => `${err[0]}: ${err[1]}`);
     setErrorMessages(errorsToSave);
   };
+
+  useEffect(() => {
+    if (teacherId) {
+      setTeacher(teacherId);
+    }
+  }, []);
 
   const canSave = [
     teacher,
@@ -102,10 +102,10 @@ const AddBooking = ({ teacherFromDetails }) => {
   }
 
   const ChooseTeacherOrNot = () => (
-    teacherFromDetails ? (
+    teacherId ? (
       <input
         type="text"
-        value={teachers.filter((teacher) => teacher.id === teacherFromDetails)[0]}
+        value={teachers.filter((teacher) => teacher.id === Number(teacherId))[0].name}
         disabled
       />
     ) : (
@@ -144,14 +144,6 @@ const AddBooking = ({ teacherFromDetails }) => {
       </form>
     </div>
   );
-};
-
-AddBooking.defaultProps = {
-  teacherFromDetails: '',
-};
-
-AddBooking.propTypes = {
-  teacherFromDetails: PropTypes.number,
 };
 
 export default AddBooking;

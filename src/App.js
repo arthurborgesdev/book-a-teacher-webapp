@@ -53,10 +53,6 @@ const App = () => {
             <Logout />
             <AddTeacher />
           </PrivateRoute>
-          <PrivateRoute exact path="/bookings/new">
-            <Logout />
-            <AddBooking />
-          </PrivateRoute>
           <PrivateRoute exact path="/bookings">
             <Logout />
             <Bookings />
@@ -68,6 +64,14 @@ const App = () => {
           <PrivateRoute exact path="/">
             <Logout />
             <Main />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bookings/new/">
+            <Logout />
+            <AddBooking />
+          </PrivateRoute>
+          <PrivateRoute path="/bookings/new/:id">
+            <Logout />
+            <AddBooking />
           </PrivateRoute>
           <Route path="*">
             <NoMatch />
