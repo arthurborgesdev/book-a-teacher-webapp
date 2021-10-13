@@ -4,11 +4,18 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import ProvideAuth from './components/authentication/ProvideAuth';
+import PrivateRoute from './components/authentication/PrivateRoute';
 
 import Login from './components/Login';
 import Main from './components/Main';
 import TeacherDetails from './components/TeacherDetails';
 import AddTeacher from './components/AddTeacher';
+import AddBooking from './components/AddBooking';
+import Bookings from './components/Bookings';
+import DeleteTeacher from './components/DeleteTeacher';
+import NoMatch from './components/authentication/NoMatch';
+import Logout from './components/authentication/Logout';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -28,26 +35,46 @@ const App = () => {
   }
 
   const teacherRoutes = data.map((teacher) => (
-    <Route key={teacher.id} exact path={`/teachers/${teacher.id}`}>
+    <PrivateRoute key={teacher.id} exact path={`/teachers/${teacher.id}`}>
+      <Logout />
       <TeacherDetails identifier={teacher.id} />
-    </Route>
+    </PrivateRoute>
   ));
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        { teacherRoutes }
-        <Route path="/teachers/new">
-          <AddTeacher />
-        </Route>
-      </Switch>
-    </Router>
+    <ProvideAuth>
+      <Router>
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          { teacherRoutes }
+          <PrivateRoute exact path="/teachers/new">
+            <Logout />
+            <AddTeacher />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bookings/new">
+            <Logout />
+            <AddBooking />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bookings">
+            <Logout />
+            <Bookings />
+          </PrivateRoute>
+          <PrivateRoute exact path="/teachers/delete">
+            <Logout />
+            <DeleteTeacher />
+          </PrivateRoute>
+          <PrivateRoute exact path="/">
+            <Logout />
+            <Main />
+          </PrivateRoute>
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
+    </ProvideAuth>
   );
 };
 

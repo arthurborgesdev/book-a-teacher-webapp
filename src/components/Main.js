@@ -27,7 +27,20 @@ const Main = () => {
     <>
       <h1>This is main page!</h1>
       <nav>
-        <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+        <ul>
+          <li>
+            <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}bookings`}>My bookings</NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
+          </li>
+        </ul>
       </nav>
       <div>
         {
@@ -43,7 +56,7 @@ const Main = () => {
               </p>
               <p>
                 Teacher Subject:
-                {teacher.subject_name}
+                {teacher.subject}
               </p>
               <Link
                 key={teacher.id}

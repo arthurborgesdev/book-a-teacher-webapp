@@ -1,10 +1,8 @@
 import React from 'react';
+import { useGetBookingsQuery } from '../services/booking';
 
-import PropTypes from 'prop-types';
-import { useGetTeacherDetailsQuery } from '../services/teacher';
-
-const TeacherDetails = ({ identifier }) => {
-  const { data, error, isLoading } = useGetTeacherDetailsQuery(identifier);
+const Bookings = () => {
+  const { data, error, isLoading } = useGetBookingsQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -22,7 +20,7 @@ const TeacherDetails = ({ identifier }) => {
     <>
       <h2>
         Name:
-        {data.name}
+        {data.teacher}
       </h2>
       <img src={data.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
       <p>
@@ -30,8 +28,8 @@ const TeacherDetails = ({ identifier }) => {
         {data.id}
       </p>
       <p>
-        Details:
-        {data.details}
+        City:
+        {data.city}
       </p>
       <p>
         Subject id:
@@ -41,8 +39,4 @@ const TeacherDetails = ({ identifier }) => {
   );
 };
 
-TeacherDetails.propTypes = {
-  identifier: PropTypes.number.isRequired,
-};
-
-export default TeacherDetails;
+export default Bookings;
