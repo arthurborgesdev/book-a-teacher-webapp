@@ -1,8 +1,14 @@
 import * as React from 'react';
 import {
+  Link,
   NavLink,
   useRouteMatch,
 } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTwitter, faFacebook, faGooglePlus, faVimeo, faPinterestP,
+} from '@fortawesome/free-brands-svg-icons';
 
 import style from './navigationPanel.module.scss';
 
@@ -11,12 +17,23 @@ const NavigationPanel = () => {
 
   return (
     <nav className={style.container}>
+      <img src="https://i.imgur.com/LWIomzF.png" alt="Our Logo" />
       <ul>
         <li>
-          <NavLink to={`${url}`}>Meet our Teachers</NavLink>
+          <NavLink to={`${url}`} activeClassName={style.active}>
+            Meet our Teachers
+          </NavLink>
         </li>
         <li>
-          <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
+          <NavLink
+            to={`${url}teachers/new`}
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red',
+            }}
+          >
+            Add Teacher
+          </NavLink>
         </li>
         <li>
           <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
@@ -28,6 +45,28 @@ const NavigationPanel = () => {
           <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
         </li>
       </ul>
+
+      <div className={style.socialMediaBlock}>
+        <div>
+          <Link to="https://www.twitter.com">
+            <FontAwesomeIcon icon={faTwitter} size="lg" />
+          </Link>
+          <Link to="https://www.facebook.com">
+            <FontAwesomeIcon icon={faFacebook} size="lg" />
+          </Link>
+          <Link to="https://www.google.com">
+            <FontAwesomeIcon icon={faGooglePlus} size="lg" />
+          </Link>
+          <Link to="https://www.vimeo.com">
+            <FontAwesomeIcon icon={faVimeo} size="lg" />
+          </Link>
+          <Link to="https://www.pinterest.com">
+            <FontAwesomeIcon icon={faPinterestP} size="lg" />
+          </Link>
+        </div>
+        <br />
+        <span>© PIAGGIO & C.S.P.A - PIVA</span>
+      </div>
     </nav>
   );
 };
