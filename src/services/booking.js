@@ -22,7 +22,6 @@ export const bookingApi = createApi({
         url: `/bookings/${bookingId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['booking'],
     }),
   }),
 });
