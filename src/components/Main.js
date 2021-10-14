@@ -10,6 +10,8 @@ import { useGetTeachersQuery } from '../services/teacher';
 
 import NavigationPanel from './NavigationPanel';
 
+import style from './main.module.scss';
+
 const Main = () => {
   const {
     data: teachers,
@@ -38,9 +40,9 @@ const Main = () => {
 
   return (
     <>
-      <h1>This is main page!</h1>
       <NavigationPanel />
-      <div>
+      <div className={style.container}>
+        <h1>This is main page!</h1>
         {
           teachers.map((teacher) => (
             <div key={teacher.id}>

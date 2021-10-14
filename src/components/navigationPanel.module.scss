@@ -3,10 +3,9 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 270px;
-  display: none;
+  width: 100%;
+  // display: none;
   background: white;
-  border-right: 2px solid whitesmoke;
 
   a {
     text-decoration: none;
@@ -25,7 +24,7 @@
   }
 
   img {
-    width: 268px;
+    width: 220px;
   }
 }
 
@@ -35,13 +34,12 @@ a.active {
 }
 
 .socialMediaBlock {
-  margin-left: 20px;
   position: absolute;
   bottom: 30px;
+  left: calc(50% - 215px/2);
 
   div {
     display: flex;
-    margin-left: 10px;
   }
 
   a {
@@ -58,16 +56,31 @@ a.active {
       background: lightgray;
     }
   }
-
-  span {
-    margin-left: 15px;
-  }
 }
 
 
 
-@media (min-width: 600px) {
+@media (min-width: 800px) {
   .container {
     display: block;
+    width: 270px;
+    border-right: 2px solid whitesmoke;
+
+    img {
+      width: 268px;
+    }
+  }
+
+  .socialMediaBlock {
+    margin-left: 20px;
+    left: 0;
+
+    div {
+      margin-left: 10px;
+    }
+
+    span {
+      margin-left: 15px;
+    }
   }
 }
