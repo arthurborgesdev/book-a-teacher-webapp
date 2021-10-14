@@ -10,10 +10,9 @@ const DeleteTeacher = () => {
 
   const [
     removeTeacher,
-    { isLoading: removeTeacherIsLoading },
   ] = useRemoveTeacherMutation();
 
-  if (getTeachersIsLoading || removeTeacherIsLoading) {
+  if (getTeachersIsLoading) {
     return <div>Loading...</div>;
   }
   if (error) {

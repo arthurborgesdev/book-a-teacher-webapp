@@ -10,10 +10,9 @@ const Bookings = () => {
 
   const [
     removeBooking,
-    { isLoading: removeBookingIsLoading },
   ] = useRemoveBookingMutation();
 
-  if (isLoading || removeBookingIsLoading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
   if (error) {
