@@ -1,4 +1,3 @@
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +17,8 @@ import NoMatch from './components/authentication/NoMatch';
 import Logout from './components/authentication/Logout';
 
 import { useGetTeachersQuery } from './services/teacher';
+
+import style from './app.module.scss';
 
 const App = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
@@ -42,7 +43,7 @@ const App = () => {
   ));
 
   return (
-    <ProvideAuth>
+    <ProvideAuth className={style.container}>
       <Router>
         <Switch>
           <Route exact path="/login">

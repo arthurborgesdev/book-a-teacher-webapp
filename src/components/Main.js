@@ -4,10 +4,11 @@ import {
 } from 'react';
 import {
   Link,
-  NavLink,
   useRouteMatch,
 } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
+
+import NavigationPanel from './NavigationPanel';
 
 const Main = () => {
   const {
@@ -38,22 +39,7 @@ const Main = () => {
   return (
     <>
       <h1>This is main page!</h1>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}bookings`}>My bookings</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
-          </li>
-        </ul>
-      </nav>
+      <NavigationPanel />
       <div>
         {
           teachers.map((teacher) => (
