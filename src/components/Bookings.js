@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
-import { useGetBookingsQuery } from '../services/booking';
+import React from 'react';
+import { useGetBookingsQuery, useRemoveBookingMutation } from '../services/booking';
 
 const Bookings = () => {
   const {
     data,
     error,
     isLoading,
-    refetch,
   } = useGetBookingsQuery();
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  const [
+    removeBooking,
+  ] = useRemoveBookingMutation();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -52,6 +51,7 @@ const Bookings = () => {
               Booking date:
               {booking.booked_for}
             </p>
+            <button type="button" onClick={() => removeBooking(booking.id)}>Remove</button>
           </div>
         ))
       }

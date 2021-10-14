@@ -10,7 +10,10 @@ const store = configureStore({
     [bookingApi.reducerPath]: bookingApi.reducer,
     [dropdownApi.reducerPath]: dropdownApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(teacherApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    .concat(teacherApi.middleware)
+    .concat(bookingApi.middleware)
+    .concat(dropdownApi.middleware),
 });
 
 export default store;
