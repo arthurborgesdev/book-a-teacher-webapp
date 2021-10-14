@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useGetBookingsQuery, useRemoveBookingMutation } from '../services/booking';
 
 const Bookings = () => {
@@ -6,17 +6,12 @@ const Bookings = () => {
     data,
     error,
     isLoading,
-    refetch,
   } = useGetBookingsQuery();
 
   const [
     removeBooking,
     { isLoading: removeBookingIsLoading },
   ] = useRemoveBookingMutation();
-
-  useEffect(() => {
-    refetch();
-  }, []);
 
   if (isLoading || removeBookingIsLoading) {
     return <div>Loading...</div>;

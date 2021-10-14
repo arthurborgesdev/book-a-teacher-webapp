@@ -15,6 +15,7 @@ export const bookingApi = createApi({
         method: 'POST',
         body: initialBooking,
       }),
+      invalidatesTags: ['booking'],
     }),
     removeBooking: builder.mutation({
       query: (bookingId) => ({

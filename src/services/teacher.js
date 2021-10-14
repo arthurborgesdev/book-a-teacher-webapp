@@ -11,6 +11,7 @@ export const teacherApi = createApi({
     }),
     getTeacherDetails: builder.query({
       query: (id) => `/teachers/${id}`,
+      providesTags: ['teacher'],
     }),
     addNewTeacher: builder.mutation({
       query: (initialTeacher) => ({
@@ -18,6 +19,7 @@ export const teacherApi = createApi({
         method: 'POST',
         body: initialTeacher,
       }),
+      invalidatesTags: ['teacher'],
     }),
     removeTeacher: builder.mutation({
       query: (teacherId) => ({
