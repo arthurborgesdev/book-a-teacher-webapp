@@ -8,8 +8,6 @@ import {
 } from 'react-router-dom';
 import { useGetTeachersQuery } from '../services/teacher';
 
-import NavigationPanel from './NavigationPanel';
-
 import style from './main.module.scss';
 
 const Main = () => {
@@ -39,37 +37,34 @@ const Main = () => {
   }
 
   return (
-    <>
-      <NavigationPanel />
-      <div className={style.container}>
-        <h1>This is main page!</h1>
-        {
-          teachers.map((teacher) => (
-            <div key={teacher.id}>
-              <p>
-                Teacher ID:
-                {teacher.id}
-              </p>
-              <p>
-                Teacher Name:
-                {teacher.name}
-              </p>
-              <p>
-                Teacher Subject:
-                {teacher.subject}
-              </p>
-              <Link
-                key={teacher.id}
-                href="/#"
-                to={`${url}teachers/${teacher.id}`}
-              >
-                See details
-              </Link>
-            </div>
-          ))
-        }
-      </div>
-    </>
+    <div className={style.container}>
+      <h1>This is main page!</h1>
+      {
+        teachers.map((teacher) => (
+          <div key={teacher.id}>
+            <p>
+              Teacher ID:
+              {teacher.id}
+            </p>
+            <p>
+              Teacher Name:
+              {teacher.name}
+            </p>
+            <p>
+              Teacher Subject:
+              {teacher.subject}
+            </p>
+            <Link
+              key={teacher.id}
+              href="/#"
+              to={`${url}teachers/${teacher.id}`}
+            >
+              See details
+            </Link>
+          </div>
+        ))
+      }
+    </div>
   );
 };
 

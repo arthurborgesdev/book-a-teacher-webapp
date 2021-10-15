@@ -1,0 +1,60 @@
+.container {
+  margin-left: 270px;
+  background: url('https://i.imgur.com/bTP17J7.jpg');
+  background-color: #97bf0f;
+  background-blend-mode: darken;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+  h1 {
+    color: white;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  p {
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    font-weight: 400;
+  }
+
+  div {
+    width: 300px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 15px 20px;
+    background: rgb(151, 191, 15, 0.8);
+    border-radius: 30px;
+    border: 2px solid #ffffe8;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+  }
+
+  textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+  }
+
+  input[type=submit] {
+    background: white;
+    color:#97bf0f;
+    cursor: pointer;
+  }
+}

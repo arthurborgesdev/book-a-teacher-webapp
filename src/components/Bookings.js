@@ -1,5 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useGetBookingsQuery, useRemoveBookingMutation } from '../services/booking';
+
+import style from './listItem.module.scss';
 
 const Bookings = () => {
   const {
@@ -24,38 +28,33 @@ const Bookings = () => {
     );
   }
 
+  const backgroundStyling = {
+    background: 'url("https://www.teclasap.com.br/wp-content/uploads/2014/07/teacher1.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  };
+
   return (
-    <>
-      <h1>My Teachers Bookings</h1>
-      {
-        data.map((booking) => (
-          <div key={booking.id}>
-            <h2>
-              Name:
-              {booking.teacher}
-            </h2>
-            <img src={booking.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
-            <p>
-              ID:
-              {booking.id}
-            </p>
-            <p>
-              City:
-              {booking.city}
-            </p>
-            <p>
-              Subject:
-              {booking.subject}
-            </p>
-            <p>
-              Booking date:
-              {booking.booked_for}
-            </p>
-            <button type="button" onClick={() => removeBooking(booking.id)}>Remove</button>
-          </div>
-        ))
-      }
-    </>
+    <div className={style.pageBackground}>
+      <div className={style.container}>
+        <h1>My Bookings</h1>
+        <br />
+        {
+          data.map((booking) => (
+            <div key={booking.id}>
+              <div style={backgroundStyling} className={style.teacherImage} />
+              <p><b>{booking.teacher}</b></p>
+              <p>{booking.city}</p>
+              <p>{booking.subject}</p>
+              <p>{booking.booked_for}</p>
+              <button type="button" onClick={() => removeBooking(booking.id)}>
+                <FontAwesomeIcon icon={faTrash} size="lg" />
+              </button>
+            </div>
+          ))
+        }
+      </div>
+    </div>
   );
 };
 

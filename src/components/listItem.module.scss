@@ -1,0 +1,91 @@
+.pageBackground {
+  background-color: whitesmoke;
+  height: 100vh;
+  margin-left: 270px !important;
+}
+
+.container {
+  font-size: 18px;
+  background: white;
+  width: 100%;
+  min-height: 50vh;
+  box-shadow: 0 0 50px #e6e6e6;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid lightgray;
+
+    & :nth-child(2) {
+      min-width: 240px;
+    }
+
+    & :nth-child(3) {
+      min-width: 150px;
+    }
+
+    & :nth-child(4) {
+      min-width: 150px;
+    }
+
+    & :nth-child(5) {
+      min-width: 130px;
+    }
+
+    button {
+      min-width: 50px !important;
+      padding: 15px;
+      background: none;
+      cursor: pointer;
+      margin: 0 0 0 auto;
+    
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+h1 {
+  padding: 20px;
+}
+
+.teacherImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+@media (min-width: 800px) {
+  .pageBackground {
+    margin: 0;
+    padding: 100px 0;
+  }
+
+  .container {
+    font-size: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+
+    & > div {
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+}
+
+@media(max-width: 1230px) {
+  .container {
+
+    & > div {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  }
+}

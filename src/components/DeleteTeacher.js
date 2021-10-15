@@ -1,5 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useGetTeachersQuery, useRemoveTeacherMutation } from '../services/teacher';
+
+import style from './listItem.module.scss';
 
 const DeleteTeacher = () => {
   const {
@@ -24,24 +28,25 @@ const DeleteTeacher = () => {
     );
   }
 
+  const backgroundStyling = {
+    background: 'url("https://www.teclasap.com.br/wp-content/uploads/2014/07/teacher1.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  };
+
   return (
-    <div>
-      <h1>Delete Teacher Page</h1>
-      <div>
+    <div className={style.pageBackground}>
+      <div className={style.container}>
+        <h1>Delete Teacher Page</h1>
         {
           data.map((teacher) => (
             <div key={teacher.id}>
-              <span>
-                Teacher ID:
-                {teacher.id}
-              </span>
-              {' | '}
-              <span>
-                Teacher Name:
-                {teacher.name}
-              </span>
-              {' | '}
-              <button type="button" onClick={() => removeTeacher(teacher.id)}>Remove</button>
+              <div style={backgroundStyling} className={style.teacherImage} />
+              <p><b>{teacher.name}</b></p>
+              <p>{teacher.subject}</p>
+              <button type="button" onClick={() => removeTeacher(teacher.id)}>
+                <FontAwesomeIcon icon={faTrash} size="lg" />
+              </button>
             </div>
           ))
         }

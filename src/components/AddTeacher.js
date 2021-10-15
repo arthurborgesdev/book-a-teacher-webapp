@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useGetSubjectsQuery } from '../services/dropdown';
 import { useAddNewTeacherMutation } from '../services/teacher';
 
+import style from './form.module.scss';
+
 const AddTeacher = () => {
   const [name, setName] = useState('');
   const [subject, setSubject] = useState('');
@@ -85,29 +87,35 @@ const AddTeacher = () => {
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
-      Teacher name:
-      <input type="text" value={name} onChange={onNameChange} required />
-      <br />
-      <br />
-      Subject:
-      <select value={subject} onChange={onSubjectChange} required>
-        <option value="">Select a Subject</option>
-        { subjects.map((subject) => (
-          <option key={subject.id} value={subject.id}>{subject.name}</option>
-        ))}
-      </select>
-      <br />
-      <br />
-      Teacher Details:
-      <input type="text" value={details} onChange={onDetailsChange} required />
-      <br />
-      <br />
-      <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
-      <br />
-      <br />
-      <input type="submit" value="Send" />
-      <Message />
+    <form onSubmit={onFormSubmit} className={style.container}>
+      <h1>Register a new Teacher to learn From</h1>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Curabitur neque lectus, fringilla dignissim imperdiet sit amet, malesuada et tellus.
+        Phasellus vehicula orci in semper aliquam. Nunc elit ipsum,
+        mattis sed aliquam sit amet, rhoncus vel lorem.
+        Aenean vitae feugiat nulla. Proin sollicitudin porttitor cursus.
+        Nunc in tempor diam. Nullam sed convallis dui.
+      </p>
+
+      <div>
+        <input type="text" value={name} onChange={onNameChange} required placeholder="Teacher Name" />
+
+        <select value={subject} onChange={onSubjectChange} required>
+          <option value="">Select a Subject</option>
+          { subjects.map((subject) => (
+            <option key={subject.id} value={subject.id}>{subject.name}</option>
+          ))}
+        </select>
+
+        <textarea type="text" value={details} onChange={onDetailsChange} required placeholder="Teacher Name" />
+
+        <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
+
+        <input type="submit" value="Send" />
+        <Message />
+      </div>
     </form>
   );
 };

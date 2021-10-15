@@ -15,6 +15,7 @@ import Bookings from './components/Bookings';
 import DeleteTeacher from './components/DeleteTeacher';
 import NoMatch from './components/authentication/NoMatch';
 import Logout from './components/authentication/Logout';
+import NavigationPanel from './components/NavigationPanel';
 
 import { useGetTeachersQuery } from './services/teacher';
 
@@ -51,26 +52,32 @@ const App = () => {
           </Route>
           { teacherRoutes }
           <PrivateRoute exact path="/teachers/new">
+            <NavigationPanel />
             <Logout />
             <AddTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings">
+            <NavigationPanel />
             <Logout />
             <Bookings />
           </PrivateRoute>
           <PrivateRoute exact path="/teachers/delete">
+            <NavigationPanel />
             <Logout />
             <DeleteTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/">
+            <NavigationPanel />
             <Logout />
             <Main />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings/new/">
+            <NavigationPanel />
             <Logout />
             <AddBooking />
           </PrivateRoute>
           <PrivateRoute path="/bookings/new/:id">
+            <NavigationPanel />
             <Logout />
             <AddBooking />
           </PrivateRoute>
