@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Link,
   NavLink,
-  useRouteMatch,
   useHistory,
 } from 'react-router-dom';
 
@@ -16,8 +15,6 @@ import { useAuth } from './authentication/ProvideAuth';
 import style from './navigationPanel.module.scss';
 
 const NavigationPanel = () => {
-  const { path } = useRouteMatch();
-
   const history = useHistory();
   const auth = useAuth();
 
@@ -26,29 +23,27 @@ const NavigationPanel = () => {
       <img src="https://i.imgur.com/LWIomzF.png" alt="Our Logo" />
       <ul>
         <li>
-          <NavLink to={`${path}`} activeClassName={style.active}>
+          <NavLink to="/" exact activeClassName={style.active}>
             Meet our Teachers
           </NavLink>
         </li>
         <li>
           <NavLink
-            to={`${path}teachers/new`}
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'red',
-            }}
+            exact
+            to="/teachers/new"
+            activeClassName={style.active}
           >
             Add Teacher
           </NavLink>
         </li>
         <li>
-          <NavLink to={`${path}bookings/new`}>Book a Teacher</NavLink>
+          <NavLink exact to="/bookings/new" activeClassName={style.active}>Book a Teacher</NavLink>
         </li>
         <li>
-          <NavLink to={`${path}bookings`}>My bookings</NavLink>
+          <NavLink exact to="/bookings" activeClassName={style.active}>My bookings</NavLink>
         </li>
         <li>
-          <NavLink to={`${path}teachers/delete`}>Delete Teacher</NavLink>
+          <NavLink exact to="/teachers/delete" activeClassName={style.active}>Delete Teacher</NavLink>
         </li>
         <li>
           {auth.user && (
