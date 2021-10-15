@@ -36,34 +36,39 @@ const Main = () => {
     );
   }
 
+  const backgroundStyling = (url) => (
+    {
+      background: `url('${url}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  );
+
   return (
     <div className={style.container}>
-      <h1>This is main page!</h1>
-      {
-        teachers.map((teacher) => (
-          <div key={teacher.id}>
-            <p>
-              Teacher ID:
-              {teacher.id}
-            </p>
-            <p>
-              Teacher Name:
-              {teacher.name}
-            </p>
-            <p>
-              Teacher Subject:
-              {teacher.subject}
-            </p>
-            <Link
-              key={teacher.id}
-              href="/#"
-              to={`${url}teachers/${teacher.id}`}
-            >
-              See details
-            </Link>
-          </div>
-        ))
-      }
+      <h1>OUR TEACHERS</h1>
+      <p>Pick one of our Teachers to Start Learning!</p>
+      <div>
+        {
+          teachers.map((teacher) => (
+            <div key={teacher.id}>
+              <div
+                style={backgroundStyling(teacher.professional_photo)}
+                className={style.teacherImage}
+              />
+              <h2>{teacher.name}</h2>
+              <p>{teacher.subject}</p>
+              <Link
+                key={teacher.id}
+                href="/#"
+                to={`${url}teachers/${teacher.id}`}
+              >
+                See details
+              </Link>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 };
