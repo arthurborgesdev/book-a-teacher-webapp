@@ -1,0 +1,57 @@
+.container {
+  background: #ffb400;
+  background-image: url('https://i.imgur.com/bsvnFn3.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: auto 120%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+
+  h1 {
+    margin-top: -100px;
+    letter-spacing: 12px;
+    padding: 0;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+
+    @media (min-width: 800px) {
+      font-size: 70px;
+    }
+  }
+
+  form {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    input {
+      padding: 15px 20px;
+      background: #ff9900;
+      border-radius: 30px;
+      border: 2px solid #ffffe8;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 500;
+      color: white;
+    }
+
+    input[type=submit] {
+      background: #97bf0f;
+      border-color: #97bf0f;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        background: #b0d82d;
+        border-color: #b0d82d;
+      }
+    }
+  }
+}

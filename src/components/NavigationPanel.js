@@ -3,6 +3,7 @@ import {
   Link,
   NavLink,
   useRouteMatch,
+  useHistory,
 } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,10 +11,15 @@ import {
   faTwitter, faFacebook, faGooglePlus, faVimeo, faPinterestP,
 } from '@fortawesome/free-brands-svg-icons';
 
+import { useAuth } from './authentication/ProvideAuth';
+
 import style from './navigationPanel.module.scss';
 
 const NavigationPanel = () => {
   const { path } = useRouteMatch();
+
+  const history = useHistory();
+  const auth = useAuth();
 
   return (
     <nav className={style.container}>
@@ -43,6 +49,18 @@ const NavigationPanel = () => {
         </li>
         <li>
           <NavLink to={`${path}teachers/delete`}>Delete Teacher</NavLink>
+        </li>
+        <li>
+          {auth.user && (
+            <button
+              type="button"
+              onClick={() => {
+                auth.signout(() => history.push('/login'));
+              }}
+            >
+              Sign out
+            </button>
+          )}
         </li>
       </ul>
 

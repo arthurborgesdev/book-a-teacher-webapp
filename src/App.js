@@ -14,7 +14,6 @@ import AddBooking from './components/AddBooking';
 import Bookings from './components/Bookings';
 import DeleteTeacher from './components/DeleteTeacher';
 import NoMatch from './components/authentication/NoMatch';
-import Logout from './components/authentication/Logout';
 import NavigationPanel from './components/NavigationPanel';
 
 import { useGetTeachersQuery } from './services/teacher';
@@ -38,7 +37,6 @@ const App = () => {
 
   const teacherRoutes = data.map((teacher) => (
     <PrivateRoute key={teacher.id} exact path={`/teachers/${teacher.id}`}>
-      <Logout />
       <TeacherDetails identifier={teacher.id} />
     </PrivateRoute>
   ));
@@ -53,32 +51,26 @@ const App = () => {
           { teacherRoutes }
           <PrivateRoute exact path="/teachers/new">
             <NavigationPanel />
-            <Logout />
             <AddTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings">
             <NavigationPanel />
-            <Logout />
             <Bookings />
           </PrivateRoute>
           <PrivateRoute exact path="/teachers/delete">
             <NavigationPanel />
-            <Logout />
             <DeleteTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/">
             <NavigationPanel />
-            <Logout />
             <Main />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings/new/">
             <NavigationPanel />
-            <Logout />
             <AddBooking />
           </PrivateRoute>
           <PrivateRoute path="/bookings/new/:id">
             <NavigationPanel />
-            <Logout />
             <AddBooking />
           </PrivateRoute>
           <Route path="*">

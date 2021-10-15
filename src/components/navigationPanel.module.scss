@@ -4,8 +4,9 @@
   left: 0;
   height: 100vh;
   width: 100%;
-  display: none;
+  // display: none;
   background: white;
+  z-index: 99;
 
   a {
     text-decoration: none;
@@ -19,6 +20,27 @@
 
     &:hover {
       background: #97bf0f;
+      color: white;
+    }
+  }
+
+  button {
+    text-decoration: none;
+    color: #454545;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: calc(100% - 20px);
+    display: block;
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+    background: white;
+    font-size: 16px;
+    width: 248px;
+    margin-left: 20px;
+
+    &:hover {
+      background: #c26666;
       color: white;
     }
   }
@@ -57,8 +79,6 @@ a.active {
     }
   }
 }
-
-
 
 @media (min-width: 800px) {
   .container {
