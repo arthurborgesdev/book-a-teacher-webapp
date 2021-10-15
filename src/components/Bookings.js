@@ -28,11 +28,13 @@ const Bookings = () => {
     );
   }
 
-  const backgroundStyling = {
-    background: 'url("https://www.teclasap.com.br/wp-content/uploads/2014/07/teacher1.jpg")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
+  const backgroundStyling = (url) => (
+    {
+      background: `url('${url}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  );
 
   return (
     <div className={style.pageBackground}>
@@ -42,7 +44,10 @@ const Bookings = () => {
         {
           data.map((booking) => (
             <div key={booking.id}>
-              <div style={backgroundStyling} className={style.teacherImage} />
+              <div
+                style={backgroundStyling(booking.professional_photo)}
+                className={style.teacherImage}
+              />
               <p><b>{booking.teacher}</b></p>
               <p>{booking.city}</p>
               <p>{booking.subject}</p>

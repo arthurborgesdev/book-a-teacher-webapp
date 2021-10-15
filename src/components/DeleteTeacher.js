@@ -28,11 +28,13 @@ const DeleteTeacher = () => {
     );
   }
 
-  const backgroundStyling = {
-    background: 'url("https://www.teclasap.com.br/wp-content/uploads/2014/07/teacher1.jpg")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
+  const backgroundStyling = (url) => (
+    {
+      background: `url('${url}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  );
 
   return (
     <div className={style.pageBackground}>
@@ -41,7 +43,10 @@ const DeleteTeacher = () => {
         {
           data.map((teacher) => (
             <div key={teacher.id}>
-              <div style={backgroundStyling} className={style.teacherImage} />
+              <div
+                style={backgroundStyling(teacher.professional_photo)}
+                className={style.teacherImage}
+              />
               <p><b>{teacher.name}</b></p>
               <p>{teacher.subject}</p>
               <button type="button" onClick={() => removeTeacher(teacher.id)}>

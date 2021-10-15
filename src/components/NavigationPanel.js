@@ -13,20 +13,20 @@ import {
 import style from './navigationPanel.module.scss';
 
 const NavigationPanel = () => {
-  const { url } = useRouteMatch();
+  const { path } = useRouteMatch();
 
   return (
     <nav className={style.container}>
       <img src="https://i.imgur.com/LWIomzF.png" alt="Our Logo" />
       <ul>
         <li>
-          <NavLink to={`${url}`} activeClassName={style.active}>
+          <NavLink to={`${path}`} activeClassName={style.active}>
             Meet our Teachers
           </NavLink>
         </li>
         <li>
           <NavLink
-            to={`${url}teachers/new`}
+            to={`${path}teachers/new`}
             activeStyle={{
               fontWeight: 'bold',
               color: 'red',
@@ -36,13 +36,13 @@ const NavigationPanel = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
+          <NavLink to={`${path}bookings/new`}>Book a Teacher</NavLink>
         </li>
         <li>
-          <NavLink to={`${url}bookings`}>My bookings</NavLink>
+          <NavLink to={`${path}bookings`}>My bookings</NavLink>
         </li>
         <li>
-          <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
+          <NavLink to={`${path}teachers/delete`}>Delete Teacher</NavLink>
         </li>
       </ul>
 
