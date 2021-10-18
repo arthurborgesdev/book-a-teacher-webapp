@@ -6,6 +6,9 @@ import {
   Link,
   useRouteMatch,
 } from 'react-router-dom';
+// import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './carousel.css';
+import { Carousel } from 'react-responsive-carousel';
 import { useGetTeachersQuery } from '../services/teacher';
 
 import style from './main.module.scss';
@@ -44,39 +47,57 @@ const Main = () => {
     }
   );
 
+  function teachersList(teachers) {
+    const teachersBlockList = [];
+    let teachersBlock = [];
+    for (let i = 0; i < teachers.length; i += 1) {
+      teachersBlock.push(
+        <div key={teachers[i].id}>
+          <div
+            style={backgroundStyling(teachers[i].professional_photo)}
+            className={style.teacherImage}
+          />
+          <br />
+          <h2>{teachers[i].name}</h2>
+          <br />
+          <p>
+            {teachers[i].name}
+            {' '}
+            is willing to teach you about
+            {' '}
+            {teachers[i].subject}
+          </p>
+          <br />
+          <Link
+            key={teachers[i].id}
+            href="/#"
+            to={`${url}teachers/${teachers[i].id}`}
+          >
+            See details
+          </Link>
+        </div>,
+      );
+      if ((i + 1) % 3 === 0) {
+        teachersBlockList.push(teachersBlock);
+        teachersBlock = [];
+      }
+    }
+    const carouselBlocks = [];
+    teachersBlockList.forEach((block) => {
+      carouselBlocks.push(
+        <div>{block}</div>,
+      );
+    });
+
+    return <Carousel className={style.carousel}>{carouselBlocks}</Carousel>;
+  }
+
   return (
     <div className={style.container}>
       <h1>OUR TEACHERS</h1>
       <p>Pick one of our Teachers to Start Learning!</p>
       <div>
-        {
-          teachers.map((teacher) => (
-            <div key={teacher.id}>
-              <div
-                style={backgroundStyling(teacher.professional_photo)}
-                className={style.teacherImage}
-              />
-              <br />
-              <h2>{teacher.name}</h2>
-              <br />
-              <p>
-                {teacher.name}
-                {' '}
-                is willing to teach you about
-                {' '}
-                {teacher.subject}
-              </p>
-              <br />
-              <Link
-                key={teacher.id}
-                href="/#"
-                to={`${url}teachers/${teacher.id}`}
-              >
-                See details
-              </Link>
-            </div>
-          ))
-        }
+        {teachersList(teachers)}
       </div>
     </div>
   );
