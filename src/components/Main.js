@@ -56,8 +56,17 @@ const Main = () => {
                 style={backgroundStyling(teacher.professional_photo)}
                 className={style.teacherImage}
               />
+              <br />
               <h2>{teacher.name}</h2>
-              <p>{teacher.subject}</p>
+              <br />
+              <p>
+                {teacher.name}
+                {' '}
+                is willing to teach you about
+                {' '}
+                {teacher.subject}
+              </p>
+              <br />
               <Link
                 key={teacher.id}
                 href="/#"
