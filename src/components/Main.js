@@ -6,7 +6,6 @@ import {
   Link,
   useRouteMatch,
 } from 'react-router-dom';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './carousel.css';
 import { Carousel } from 'react-responsive-carousel';
 import { useGetTeachersQuery } from '../services/teacher';
@@ -48,6 +47,8 @@ const Main = () => {
   );
 
   function teachersList(teachers) {
+    // eslint-disable-next-line no-nested-ternary
+    const divider = window.innerWidth < 1580 ? (window.innerWidth < 1150 ? 1 : 2) : 3;
     const teachersBlockList = [];
     let teachersBlock = [];
     for (let i = 0; i < teachers.length; i += 1) {
@@ -77,7 +78,7 @@ const Main = () => {
           </Link>
         </div>,
       );
-      if ((i + 1) % 3 === 0) {
+      if ((i + 1) % divider === 0) {
         teachersBlockList.push(teachersBlock);
         teachersBlock = [];
       }

@@ -32,7 +32,7 @@
   }
 
   .teacherDetails {
-    width: 300px;
+    width: 280px;
 
     & > div > p {
       color: black;
@@ -55,6 +55,7 @@
     color: white;
     font-weight: bold;
     font-size: 16px;
+    margin-bottom: 20px;
 
     &:hover {
       opacity: 0.8;
@@ -71,8 +72,8 @@
   }
 
   .teacherImage {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
   }
 
@@ -81,6 +82,10 @@
     margin-left: 270px;
     flex-direction: row;
     align-items: flex-start;
+
+    .teacherDetails {
+      width: 300px;
+    }
 
     .teacherImage {
       width: 200px;

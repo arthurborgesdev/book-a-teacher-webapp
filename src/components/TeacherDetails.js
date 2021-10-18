@@ -60,8 +60,10 @@ const TeacherDetails = ({ identifier }) => {
           <br />
           To read more about it, please contact our staff.
         </p>
-
         <NavLink to={`/bookings/new/${teacher.id}`}>Start Learning ➤</NavLink>
+        <br />
+        <br />
+        <br />
       </div>
       <NavLink to="/" className={style.goBack}>↩</NavLink>
     </div>
