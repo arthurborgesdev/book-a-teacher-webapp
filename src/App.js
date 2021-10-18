@@ -37,6 +37,7 @@ const App = () => {
 
   const teacherRoutes = data.map((teacher) => (
     <PrivateRoute key={teacher.id} exact path={`/teachers/${teacher.id}`}>
+      <NavigationPanel />
       <TeacherDetails identifier={teacher.id} />
     </PrivateRoute>
   ));

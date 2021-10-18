@@ -6,6 +6,8 @@ import {
 import PropTypes from 'prop-types';
 import { useGetTeacherDetailsQuery } from '../services/teacher';
 
+import style from './teacherDetails.module.scss';
+
 const TeacherDetails = ({ identifier }) => {
   const { data: teacher, error, isLoading } = useGetTeacherDetailsQuery(identifier);
 
@@ -21,27 +23,48 @@ const TeacherDetails = ({ identifier }) => {
     );
   }
 
+  const backgroundStyling = (url) => (
+    {
+      background: `url('${url}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  );
+
   return (
-    <>
-      <h2>
-        Name:
-        {teacher.name}
-      </h2>
-      <img src={teacher.professional_photo} alt="People visual understanding of the teacher's appearance" width="400" />
-      <p>
-        ID:
-        {teacher.id}
-      </p>
-      <p>
-        Details:
-        {teacher.details}
-      </p>
-      <p>
-        Subject:
-        {teacher.subject}
-      </p>
-      <NavLink to={`/bookings/new/${teacher.id}`}>Book this Teacher</NavLink>
-    </>
+    <div className={style.container}>
+      <div
+        style={backgroundStyling(teacher.professional_photo)}
+        className={style.teacherImage}
+      />
+      <div className={style.teacherDetails}>
+        <h2>{teacher.name}</h2>
+        <div>
+          <br />
+          <br />
+          <p>Subject</p>
+          <p>{teacher.subject}</p>
+          <p>About them</p>
+          <p>{teacher.details}</p>
+        </div>
+        <br />
+        <p>
+          <b>10 U$</b>
+          {' '}
+          per hour
+        </p>
+
+        <p className={style.explanation}>
+          All of our Teachers have an hourly rate of 10U$
+          according to the regulations imposed by our platform.
+          <br />
+          To read more about it, please contact our staff.
+        </p>
+
+        <NavLink to={`/bookings/new/${teacher.id}`}>Start Learning ➤</NavLink>
+      </div>
+      <NavLink to="/" className={style.goBack}>↩</NavLink>
+    </div>
   );
 };
 
