@@ -8,7 +8,7 @@
   background: white;
   z-index: 99;
 
-  a {
+  li a {
     text-decoration: none;
     color: #454545;
     font-weight: 600;
@@ -24,12 +24,36 @@
     }
   }
 
+  .socialMediaBlock {
+    position: absolute;
+    bottom: 30px;
+    left: calc(50% - 215px / 2);
+
+    div {
+      display: flex;
+    }
+
+    .socialButton {
+      padding: 10px;
+      width: 41px;
+      margin: 0;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        fill: white;
+        background: lightgray;
+      }
+    }
+  }
+
   button {
     text-decoration: none;
     color: #454545;
     font-weight: 600;
     text-transform: uppercase;
-    width: calc(100% - 20px);
     display: block;
     padding: 15px;
     cursor: pointer;
@@ -53,31 +77,6 @@
 a.active {
   background: #97bf0f;
   color: white;
-}
-
-.socialMediaBlock {
-  position: absolute;
-  bottom: 30px;
-  left: calc(50% - 215px/2);
-
-  div {
-    display: flex;
-  }
-
-  a {
-    padding: 10px;
-    width: 41px;
-    margin: 0;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-      fill: white;
-      background: lightgray;
-    }
-  }
 }
 
 @media (min-width: 800px) {

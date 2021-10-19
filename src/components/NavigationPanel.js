@@ -61,19 +61,19 @@ const NavigationPanel = () => {
 
       <div className={style.socialMediaBlock}>
         <div>
-          <Link to="https://www.twitter.com">
+          <Link to="https://www.twitter.com" className={style.socialButton}>
             <FontAwesomeIcon icon={faTwitter} size="lg" />
           </Link>
-          <Link to="https://www.facebook.com">
+          <Link to="https://www.facebook.com" className={style.socialButton}>
             <FontAwesomeIcon icon={faFacebook} size="lg" />
           </Link>
-          <Link to="https://www.google.com">
+          <Link to="https://www.google.com" className={style.socialButton}>
             <FontAwesomeIcon icon={faGooglePlus} size="lg" />
           </Link>
-          <Link to="https://www.vimeo.com">
+          <Link to="https://www.vimeo.com" className={style.socialButton}>
             <FontAwesomeIcon icon={faVimeo} size="lg" />
           </Link>
-          <Link to="https://www.pinterest.com">
+          <Link to="https://www.pinterest.com" className={style.socialButton}>
             <FontAwesomeIcon icon={faPinterestP} size="lg" />
           </Link>
         </div>

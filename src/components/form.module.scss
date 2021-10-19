@@ -6,7 +6,6 @@
   min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center center;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,7 +53,7 @@
 
   input[type=submit] {
     background: white;
-    color:#97bf0f;
+    color: #97bf0f;
     cursor: pointer;
   }
 }

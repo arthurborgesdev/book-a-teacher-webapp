@@ -48,7 +48,7 @@
       position: absolute;
       top: 10px;
       right: 0;
-    
+
       &:hover {
         opacity: 0.7;
       }
@@ -87,17 +87,15 @@ h1 {
       }
     }
   }
-
 }
 
-@media(max-width: 1230px) {
+@media (max-width: 1230px) {
   .pageBackground {
     margin: 0;
     padding: 0;
   }
 
   .container {
-
     h1 {
       padding: 40px 0 0 20px;
     }
