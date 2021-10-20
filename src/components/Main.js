@@ -4,10 +4,13 @@ import {
 } from 'react';
 import {
   Link,
-  NavLink,
   useRouteMatch,
 } from 'react-router-dom';
+import './carousel.css';
+import { Carousel } from 'react-responsive-carousel';
 import { useGetTeachersQuery } from '../services/teacher';
+
+import style from './main.module.scss';
 
 const Main = () => {
   const {
@@ -35,53 +38,71 @@ const Main = () => {
     );
   }
 
+  const backgroundStyling = (url) => (
+    {
+      background: `url('${url}')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }
+  );
+
+  function teachersList(teachers) {
+    // eslint-disable-next-line no-nested-ternary
+    const divider = window.innerWidth < 1580 ? (window.innerWidth < 1150 ? 1 : 2) : 3;
+    const teachersBlockList = [];
+    let teachersBlock = [];
+    for (let i = 0; i < teachers.length; i += 1) {
+      teachersBlock.push(
+        <div key={teachers[i].id}>
+          <div
+            style={backgroundStyling(teachers[i].professional_photo)}
+            className={style.teacherImage}
+          />
+          <br />
+          <h2>{teachers[i].name}</h2>
+          <br />
+          <p>
+            {teachers[i].name}
+            {' '}
+            is willing to teach you about
+            {' '}
+            {teachers[i].subject}
+          </p>
+          <br />
+          <Link
+            key={teachers[i].id}
+            href="/#"
+            to={`${url}teachers/${teachers[i].id}`}
+          >
+            See details
+          </Link>
+        </div>,
+      );
+      if ((i + 1) % divider === 0) {
+        teachersBlockList.push(teachersBlock);
+        teachersBlock = [];
+      }
+    }
+    if (teachers.length > 0) {
+      teachersBlockList.push(teachersBlock);
+    }
+    const carouselBlocks = [];
+    teachersBlockList.forEach((block) => {
+      carouselBlocks.push(
+        <div>{block}</div>,
+      );
+    });
+    return <Carousel className={style.carousel}>{carouselBlocks}</Carousel>;
+  }
+
   return (
-    <>
-      <h1>This is main page!</h1>
-      <nav>
-        <ul>
-          <li>
-            <NavLink to={`${url}teachers/new`}>Add Teacher</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}bookings/new`}>Book a Teacher</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}bookings`}>My bookings</NavLink>
-          </li>
-          <li>
-            <NavLink to={`${url}teachers/delete`}>Delete Teacher</NavLink>
-          </li>
-        </ul>
-      </nav>
+    <div className={style.container}>
+      <h1>OUR TEACHERS</h1>
+      <p>Pick one of our Teachers to Start Learning!</p>
       <div>
-        {
-          teachers.map((teacher) => (
-            <div key={teacher.id}>
-              <p>
-                Teacher ID:
-                {teacher.id}
-              </p>
-              <p>
-                Teacher Name:
-                {teacher.name}
-              </p>
-              <p>
-                Teacher Subject:
-                {teacher.subject}
-              </p>
-              <Link
-                key={teacher.id}
-                href="/#"
-                to={`${url}teachers/${teacher.id}`}
-              >
-                See details
-              </Link>
-            </div>
-          ))
-        }
+        {teachersList(teachers)}
       </div>
-    </>
+    </div>
   );
 };
 

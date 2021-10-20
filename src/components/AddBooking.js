@@ -5,6 +5,8 @@ import { useGetCitiesQuery } from '../services/dropdown';
 import { getFromLocalStorage } from '../scripts/storage';
 import { useAddNewBookingMutation } from '../services/booking';
 
+import style from './form.module.scss';
+
 const AddBooking = () => {
   const [teacher, setTeacher] = useState('');
   const [city, setCity] = useState('');
@@ -119,30 +121,34 @@ const AddBooking = () => {
   );
 
   return (
-    <div>
-      <h1>Add Booking page</h1>
-      <form onSubmit={onFormSubmit}>
-        Teacher name:
+    <form onSubmit={onFormSubmit} className={style.container}>
+      <h1>Book a time with a Teacher</h1>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Curabitur neque lectus, fringilla dignissim imperdiet sit amet, malesuada et tellus.
+        Phasellus vehicula orci in semper aliquam. Nunc elit ipsum,
+        mattis sed aliquam sit amet, rhoncus vel lorem.
+        Aenean vitae feugiat nulla. Proin sollicitudin porttitor cursus.
+        Nunc in tempor diam. Nullam sed convallis dui.
+      </p>
+
+      <div>
         <ChooseTeacherOrNot />
-        <br />
-        <br />
-        City:
+
         <select value={city} onChange={onCityChange} required>
           <option value="">Select a City</option>
           { cities.map((city) => (
             <option key={city.id} value={city.id}>{city.name}</option>
           ))}
         </select>
-        <br />
-        <br />
-        Book date:
+
         <input type="date" value={bookedDate} onChange={onBookedDateChange} required />
-        <br />
-        <br />
+
         <input type="submit" value="Send" />
         <Message />
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

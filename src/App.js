@@ -1,4 +1,3 @@
-import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,9 +14,11 @@ import AddBooking from './components/AddBooking';
 import Bookings from './components/Bookings';
 import DeleteTeacher from './components/DeleteTeacher';
 import NoMatch from './components/authentication/NoMatch';
-import Logout from './components/authentication/Logout';
+import NavigationPanel from './components/NavigationPanel';
 
 import { useGetTeachersQuery } from './services/teacher';
+
+import style from './app.module.scss';
 
 const App = () => {
   const { data, error, isLoading } = useGetTeachersQuery();
@@ -36,13 +37,13 @@ const App = () => {
 
   const teacherRoutes = data.map((teacher) => (
     <PrivateRoute key={teacher.id} exact path={`/teachers/${teacher.id}`}>
-      <Logout />
+      <NavigationPanel />
       <TeacherDetails identifier={teacher.id} />
     </PrivateRoute>
   ));
 
   return (
-    <ProvideAuth>
+    <ProvideAuth className={style.container}>
       <Router>
         <Switch>
           <Route exact path="/login">
@@ -50,27 +51,27 @@ const App = () => {
           </Route>
           { teacherRoutes }
           <PrivateRoute exact path="/teachers/new">
-            <Logout />
+            <NavigationPanel />
             <AddTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings">
-            <Logout />
+            <NavigationPanel />
             <Bookings />
           </PrivateRoute>
           <PrivateRoute exact path="/teachers/delete">
-            <Logout />
+            <NavigationPanel />
             <DeleteTeacher />
           </PrivateRoute>
           <PrivateRoute exact path="/">
-            <Logout />
+            <NavigationPanel />
             <Main />
           </PrivateRoute>
           <PrivateRoute exact path="/bookings/new/">
-            <Logout />
+            <NavigationPanel />
             <AddBooking />
           </PrivateRoute>
           <PrivateRoute path="/bookings/new/:id">
-            <Logout />
+            <NavigationPanel />
             <AddBooking />
           </PrivateRoute>
           <Route path="*">
