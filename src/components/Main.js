@@ -83,13 +83,15 @@ const Main = () => {
         teachersBlock = [];
       }
     }
+    if (teachers.length > 0) {
+      teachersBlockList.push(teachersBlock);
+    }
     const carouselBlocks = [];
     teachersBlockList.forEach((block) => {
       carouselBlocks.push(
         <div>{block}</div>,
       );
     });
-
     return <Carousel className={style.carousel}>{carouselBlocks}</Carousel>;
   }
 
