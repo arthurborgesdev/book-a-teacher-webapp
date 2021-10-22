@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const bookingApi = createApi({
   reducerPath: 'bookingApi',
   tagTypes: ['booking'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api/v1/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://book-a-teacher.herokuapp.com/api/v1/' }),
   endpoints: (builder) => ({
     getBookings: builder.query({
       query: () => '/bookings',
