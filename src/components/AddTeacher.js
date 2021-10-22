@@ -109,7 +109,7 @@ const AddTeacher = () => {
           ))}
         </select>
 
-        <textarea type="text" value={details} onChange={onDetailsChange} required placeholder="Teacher Name" />
+        <textarea type="text" value={details} onChange={onDetailsChange} required placeholder="Teacher Details" />
 
         <input type="file" accept="image/*" multiple={false} onChange={onImageChange} required />
 
